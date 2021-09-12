@@ -13,6 +13,11 @@ hook.Add("ScalePlayerDamage", "CFC_HitgroupDamageModifiers_ApplyDamageMultiplier
     if inflictor:IsPlayer() then
         inflictor = inflictor:GetActiveWeapon()
     end
+    local damageValues = inflictor.CFCHitGroupDamageValues
+    if damageValues and damageValues[hitGroup] then
+        dmgInfo:SetDamage( damageValues[hitGroup] )
+        return
+    end
 
     local damageMultipliers = inflictor.CFCDamageMultipliers
     if not damageMultipliers then return end
